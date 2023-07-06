@@ -1,20 +1,26 @@
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()" action="">
+    <input type="text" placeholder="search city" name="cityName" [(ngModel)]="cityName" >
+  </form>
+</div>
+
 <div class="container">
   <div class="upper-data">
-     <img src="../assets/warm.jpg" *ngIf="14>15">
-     <img src="../assets/cold.jpg" *ngIf="14<15">
+     <img  src="../assets/warm.jpg" *ngIf="weatherData.temp - 273.15 >= 30">
+     <img src="../assets/cold.jpg" *ngIf="weatherData.temp - 273 < 30">
      <div class="weather-data">
       <div class="location">
-          Wellington
+         {{cityName ? cityName : city}}
       </div>
       <div class="temperature">
-         {{14.40 | number: '1.0-0'}}°C 
+         {{weatherData.temp - 273.15 | number: '1.0-0'}}°C 
       </div>
      </div>
   </div>
   <div class="lower-data">
-     <div class="more-info-label">
+     <!-- <div class="more-info-label">
       More Information
-     </div>
+     </div> -->
      <div class="more-info-container">
       <div class="info-block">
         <div class="info-block-label">
@@ -22,7 +28,7 @@
           <span>min</span>
         </div>
         <div class="info-block-value">
-          10°C
+        {{(weatherData.temp_min - 273.15).toFixed(2)}}
         </div>
       </div>
 
@@ -32,7 +38,7 @@
           <span>max</span>
         </div>
         <div class="info-block-value">
-          30°C
+         {{(weatherData.temp_max - 273.15).toFixed(2)}}
         </div>
       </div>
 
@@ -42,7 +48,7 @@
           <span>humidity</span>
         </div>
         <div class="info-block-value">
-          77%
+          {{weatherData.humidity}}
         </div>
       </div>
 
